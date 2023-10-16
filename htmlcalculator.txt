@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculator {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 48%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="input1" placeholder="Enter number">
+        <input type="text" id="input2" placeholder="Enter number">
+        <div>
+            <button onclick="add()">+</button>
+            <button onclick="subtract()">-</button>
+            <button onclick="multiply()">*</button>
+            <button onclick="divide()">/</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function add() {
+            calculate((a, b) => a + b);
+        }
+
+        function subtract() {
+            calculate((a, b) => a - b);
+        }
+
+        function multiply() {
+            calculate((a, b) => a * b);
+        }
+
+        function divide() {
+            calculate((a, b) => a / b);
+        }
+
+        function calculate(operation) {
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const input2 = parseFloat(document.getElementById('input2').value);
+
+            if (isNaN(input1) || isNaN(input2)) {
+                document.getElementById('result').innerText = 'Please enter valid numbers.';
+            } else {
+                const result = operation(input1, input2);
+                document.getElementById('result').innerText = `Result: ${result}`;
+            }
+        }
+    </script>
+</body>
+</html>

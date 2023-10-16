@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <form id="surveyForm" onsubmit="submitForm(); return false;">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+
+        <label for="country">Country:</label>
+        <select id="country" required>
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="uk">UK</option>
+            <!-- Add more countries as needed -->
+        </select>
+
+        <label>Gender:</label>
+        <label><input type="checkbox" name="gender" value="male"> Male</label>
+        <label><input type="checkbox" name="gender" value="female"> Female</label>
+
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" required>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <div id="popup"></div>
+
+    <script>
+        function submitForm() {
+            // Perform form validation here
+            // For simplicity, just displaying a popup with selected values
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dob = document.getElementById('dob').value;
+            const country = document.getElementById('country').value;
+            const gender = Array.from(document.querySelectorAll('input[name="gender"]:checked'))
+                              .map(checkbox => checkbox.value)
+                              .join(', ');
+            const profession = document.getElementById('profession').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            const popupContent = `
+                <p><strong>First Name:</strong> ${firstName}</p>
+                <p><strong>Last Name:</strong> ${lastName}</p>
+                <p><strong>Date of Birth:</strong> ${dob}</p>
+                <p><strong>Country:</strong> ${country}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Profession:</strong> ${profession}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Mobile Number:</strong> ${mobile}</p>
+            `;
+
+            document.getElementById('popup').innerHTML = popupContent;
+            document.getElementById('popup').style.display = 'block';
+
+            // Reset the form
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</body>
+</html>
